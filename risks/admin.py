@@ -4,12 +4,15 @@ from .models import Risk, RiskTextField, RiskNumberField, RiskDateTimeField
 
 class RiskTextFieldInline(admin.TabularInline):
     model = RiskTextField
+    extra = 0
 
 class RiskNumberFieldInline(admin.TabularInline):
     model = RiskNumberField
+    extra = 0
 
 class RiskDateTimeFieldInline(admin.TabularInline):
     model = RiskDateTimeField
+    extra = 0
 
 class RiskAdmin(admin.ModelAdmin):
     inlines = [
@@ -17,11 +20,5 @@ class RiskAdmin(admin.ModelAdmin):
         RiskNumberFieldInline,
         RiskDateTimeFieldInline
     ]
-
-    def get_extra(self, request, obj=None, **kwargs):
-        extra = 1
-        if obj:
-            return extra - obj.binarytree_set.count()
-        return extra
 
 admin.site.register(Risk, RiskAdmin)
