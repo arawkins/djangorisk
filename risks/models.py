@@ -1,5 +1,8 @@
 from django.db import models
 
+# make separate riskdata, and relate field models to that
+# make basic Risk have just a normal meta field relation to denote structure
+
 class Risk(models.Model):
     """ A class to model risks.
 
@@ -29,6 +32,9 @@ class Risk(models.Model):
             data['fields'].append(field.get_json())
 
         for field in self.datetimefields.all():
+            data['fields'].append(field.get_json())
+
+        for field in self.enumfields.all():
             data['fields'].append(field.get_json())
 
         return data
@@ -103,6 +109,7 @@ class RiskEnumField(RiskField):
     """
 
     value = models.CharField(blank=True, null=True, max_length=128)
+    risk = models.ForeignKey(Risk, on_delete=models.CASCADE, related_name='enumfields')
 
     # possible_values should be a pipe delimted string of possible values for this field
     possible_values = models.TextField(blank=True, null=True)
