@@ -44,6 +44,10 @@ class Risk(models.Model):
         # sort the fields based on their order field
         data['fields'].sort(key=lambda field: field['order'])
 
+        for field in data['fields']:
+            if 'order' in field:
+                del field['order']
+
         return data
 
 class RiskField(models.Model):
