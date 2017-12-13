@@ -118,7 +118,7 @@ USE_L10N = True
 USE_TZ = True
 
 # Logging
-
+"""
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -135,7 +135,7 @@ LOGGING = {
         },
     }
 }
-
+"""
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
