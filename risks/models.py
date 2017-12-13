@@ -82,7 +82,6 @@ class RiskField(models.Model):
         """
 
         return OrderedDict({
-            'id'  : self.id,
             'name': self.name,
             'order': self.order,
             'type': None

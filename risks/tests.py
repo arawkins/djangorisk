@@ -71,22 +71,22 @@ class TestRiskIdEndPointData(TestCase):
 
     def test_risk_text_field(self):
         """ Does the risk text field have the expected data? """
-        expected_data = {'id': 1, 'name': 'Species', 'type': RiskField.TEXT}
+        expected_data = {'name': 'Species', 'type': RiskField.TEXT}
         self.assertEquals(self.response['fields'][0], expected_data)
 
     def test_risk_number_field(self):
         """ Does the risk number field have the expected data? """
-        expected_data = {'id': 1, 'name': 'Number of legs', 'type': RiskField.NUMBER}
+        expected_data = {'name': 'Number of legs', 'type': RiskField.NUMBER}
         self.assertEquals(self.response['fields'][3], expected_data)
 
     def test_risk_datetime_field(self):
         """ Does the risk datetime field have the expected data? """
-        expected_data = {'id': 1, 'name': 'First found', 'type': RiskField.DATETIME}
+        expected_data = {'name': 'First found', 'type': RiskField.DATETIME}
         self.assertEquals(self.response['fields'][1], expected_data)
 
     def test_risk_enum_field(self):
         """ Does the risk enum field have the expected data? """
-        expected_data = {'id': 1, 'name': 'Diet', 'type': RiskField.ENUM, 'possible_values': ['Carnivore', 'Herbivore', 'Omnivore']}
+        expected_data = {'name': 'Diet', 'type': RiskField.ENUM, 'possible_values': ['Carnivore', 'Herbivore', 'Omnivore']}
         self.assertEquals(self.response['fields'][2], expected_data)
 
 class TestEmptyRisk(TestCase):
