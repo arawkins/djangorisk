@@ -24,8 +24,19 @@ class TestEndPointStatusCodes(TestCase):
         response = self.client.get('/risks/1/')
         self.assertEqual(response.status_code, 404)
 
-class TestEndPointData(TestCase):
-    """ Verifies the data returned from the API Endpoints """
+class TestRisksEndPointData(TestCase):
+    """ Tests the data returned from the /risks/ API Endpoint """
+    def setUp(self):
+        r1 = Risk.objects.create(name='Dinosaurs')
+        r2 = Risk.objects.create(name='Planes')
+        c = Client()
+        self.response = c.get('/risks/').json()
+
+    def test_data_length(self):
+        self.assertEquals(len(self.response),2)
+
+class TestRiskIdEndPointData(TestCase):
+    """ Tests the data returned from the /risks/<risk:id> API Endpoint """
 
     def setUp(self):
         # Set up data
@@ -35,13 +46,13 @@ class TestEndPointData(TestCase):
         RiskEnumField.objects.create(name='Diet', possible_values='Carnivore|Herbivore|Omnivore', risk=r1, order=3)
         RiskNumberField.objects.create(name='Number of legs', risk=r1, order=4)
 
-
         # make a request and save the response for testing
         c = Client()
         self.response = c.get('/risks/1/').json()
 
     def test_data_length(self):
-        self.assertEquals(len([self.response]),1)
+        """ The reponse should have three fields """
+        self.assertEquals(len(self.response),3)
 
     def test_data_order(self):
         """ fields should be present in the json in the correct order """
