@@ -35,6 +35,7 @@ class TestEndPointData(TestCase):
         RiskEnumField.objects.create(name='Diet', possible_values='Carnivore|Herbivore|Omnivore', risk=r1, order=3)
         RiskNumberField.objects.create(name='Number of legs', risk=r1, order=4)
 
+
         # make a request and save the response for testing
         c = Client()
         self.response = c.get('/risks/1/').json()
@@ -69,3 +70,16 @@ class TestEndPointData(TestCase):
     def test_risk_enum_field(self):
         expected_data = {'id': 1, 'name': 'Diet', 'order': 3, 'type': RiskField.ENUM, 'possible_values': ['Carnivore', 'Herbivore', 'Omnivore']}
         self.assertEquals(self.response['fields'][2], expected_data)
+
+class TestEmptyRisk(TestCase):
+
+    def setUp(self):
+        # create a Risk with no fields.
+        r1 = Risk.objects.create(name='Dinosaurs')
+
+        # make a request and save the response for testing
+        c = Client()
+        self.response = c.get('/risks/1/').json()
+
+    def test_data(self):
+        self.assertEquals(self.response['fields'], [])
