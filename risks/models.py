@@ -72,8 +72,7 @@ class RiskField(models.Model):
         return {
             'id'  : self.id,
             'name': self.name,
-            'type': None,
-            'possible_values': None
+            'type': None
         }
 
     class Meta:
@@ -81,7 +80,6 @@ class RiskField(models.Model):
 
 class RiskTextField(RiskField):
     """ A field to hold text data on risks """
-    value = models.TextField(blank=True, null=True)
     risk = models.ForeignKey('Risk', on_delete=models.CASCADE, related_name='textfields')
 
     def get_data(self):
@@ -91,7 +89,6 @@ class RiskTextField(RiskField):
 
 class RiskNumberField(RiskField):
     """ A field to hold numerical values on a risk. """
-    value = models.DecimalField(blank=True, null=True, max_digits=24, decimal_places=2)
     risk = models.ForeignKey('Risk', on_delete=models.CASCADE, related_name='numberfields')
 
     def get_data(self):
@@ -101,7 +98,6 @@ class RiskNumberField(RiskField):
 
 class RiskDateTimeField(RiskField):
     """ A field to hold Datetime information on risks """
-    value = models.DateTimeField(blank=True, null=True)
     risk = models.ForeignKey('Risk', on_delete=models.CASCADE, related_name='datetimefields')
 
     def get_data(self):
@@ -116,7 +112,6 @@ class RiskEnumField(RiskField):
     Possible values are stored as a pipe delimited string.
     """
 
-    value = models.CharField(blank=True, null=True, max_length=128)
     risk = models.ForeignKey('Risk', on_delete=models.CASCADE, related_name='enumfields')
     possible_values = models.TextField(blank=True, null=True)
 
