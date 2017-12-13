@@ -41,6 +41,9 @@ class Risk(models.Model):
         for field in self.enumfields.all():
             data['fields'].append(field.get_data())
 
+        # sort the fields based on their order field
+        data['fields'].sort(key=lambda field: field['order'])
+
         return data
 
 class RiskField(models.Model):
@@ -74,6 +77,7 @@ class RiskField(models.Model):
         return {
             'id'  : self.id,
             'name': self.name,
+            'order': self.order,
             'type': None
         }
 

@@ -55,17 +55,17 @@ class TestEndPointData(TestCase):
         self.assertEquals(len(self.response['fields']), 4)
 
     def test_risk_text_field(self):
-        expected_data = {'id': 1, 'name': 'Species', 'type': RiskField.TEXT}
+        expected_data = {'id': 1, 'name': 'Species', 'order': 1, 'type': RiskField.TEXT}
         self.assertEquals(self.response['fields'][0], expected_data)
 
     def test_risk_number_field(self):
-        expected_data = {'id': 1, 'name': 'Number of legs', 'type': RiskField.NUMBER}
-        self.assertEquals(self.response['fields'][1], expected_data)
+        expected_data = {'id': 1, 'name': 'Number of legs', 'order': 4, 'type': RiskField.NUMBER}
+        self.assertEquals(self.response['fields'][3], expected_data)
 
     def test_risk_datetime_field(self):
-        expected_data = {'id': 1, 'name': 'First found', 'type': RiskField.DATETIME}
-        self.assertEquals(self.response['fields'][2], expected_data)
+        expected_data = {'id': 1, 'name': 'First found', 'order': 2, 'type': RiskField.DATETIME}
+        self.assertEquals(self.response['fields'][1], expected_data)
 
     def test_risk_enum_field(self):
-        expected_data = {'id': 1, 'name': 'Diet', 'type': RiskField.ENUM, 'possible_values': ['Carnivore', 'Herbivore', 'Omnivore']}
-        self.assertEquals(self.response['fields'][3], expected_data)
+        expected_data = {'id': 1, 'name': 'Diet', 'order': 3, 'type': RiskField.ENUM, 'possible_values': ['Carnivore', 'Herbivore', 'Omnivore']}
+        self.assertEquals(self.response['fields'][2], expected_data)
