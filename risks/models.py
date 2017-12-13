@@ -1,3 +1,4 @@
+from collections import OrderedDict
 from django.db import models
 
 class Risk(models.Model):
@@ -22,11 +23,11 @@ class Risk(models.Model):
         added to a fields list in the dictionary.
         """
 
-        data = {
-            'id': self.id,
-            'name': self.name,
-            'fields': []
-        }
+        # use an ordered dict to ensure readable json output
+        data = OrderedDict()
+        data['id'] = self.id
+        data['name'] =  self.name
+        data['fields'] = []
 
         for field in self.textfields.all():
             data['fields'].append(field.get_data())
