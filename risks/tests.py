@@ -30,10 +30,10 @@ class TestEndPointData(TestCase):
     def setUp(self):
         # Set up data
         r1 = Risk.objects.create(name='Dinosaurs')
-        RiskTextField.objects.create(name='Species', risk=r1)
-        RiskDateTimeField.objects.create(name='First found', risk=r1)
-        RiskEnumField.objects.create(name='Diet', possible_values='Carnivore|Herbivore|Omnivore', risk=r1)
-        RiskNumberField.objects.create(name='Number of legs', risk=r1)
+        RiskTextField.objects.create(name='Species', risk=r1, order=1)
+        RiskDateTimeField.objects.create(name='First found', risk=r1, order=2)
+        RiskEnumField.objects.create(name='Diet', possible_values='Carnivore|Herbivore|Omnivore', risk=r1, order=3)
+        RiskNumberField.objects.create(name='Number of legs', risk=r1, order=4)
 
         # make a request and save the response for testing
         c = Client()
@@ -41,6 +41,12 @@ class TestEndPointData(TestCase):
 
     def test_data_length(self):
         self.assertEquals(len([self.response]),1)
+
+    def test_data_order(self):
+        """ fields should be present in the json in the correct order """
+        expected_order = ['Species', 'First found', 'Diet', 'Number of legs']
+        received_order = [field['name'] for field in self.response['fields']]
+        self.assertEquals(expected_order, received_order)
 
     def test_risk_name(self):
         self.assertEquals(self.response['name'], 'Dinosaurs')
