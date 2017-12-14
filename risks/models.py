@@ -24,11 +24,11 @@ class Risk(models.Model):
         """
 
         # use an ordered dict to ensure readable json output
-        data = OrderedDict({
-            'id': self.id,
-            'name': self.name,
-            'fields': []
-        })
+        data = OrderedDict()
+        data['id'] = self.id
+        data['name'] = self.name
+        data['fields'] = []
+
 
         for field in self.textfields.all():
             data['fields'].append(field.get_data())
@@ -46,7 +46,6 @@ class Risk(models.Model):
         data['fields'].sort(key=lambda field: field['order'])
 
         # remove the order field from the output
-        # it is implied by the order of the data
         for field in data['fields']:
             if 'order' in field:
                 del field['order']
@@ -80,12 +79,12 @@ class RiskField(models.Model):
 
         type and possible_values are defined in child classes
         """
+        data = OrderedDict()
+        data['name'] = self.name
+        data['order'] = self.order
+        data['type'] = None
 
-        return OrderedDict({
-            'name': self.name,
-            'order': self.order,
-            'type': None
-        })
+        return data
 
     class Meta:
         abstract = True

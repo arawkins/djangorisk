@@ -1,2 +1,5 @@
 *.sqlite3
 __pycache__
+credentials
+Dockerfile
+DockerRun
