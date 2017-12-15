@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 't#^pqu5%8o-pc%^5xsi_1^&_kz*y6i67-z*uzl@)b&*#t!j!kw'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'testserver',
@@ -143,6 +143,7 @@ LOGGING = {
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = "/static/"
+STATIC_ROOT =  os.path.join(BASE_DIR, "static")
 
 CORS_ORIGIN_ALLOW_ALL = True
