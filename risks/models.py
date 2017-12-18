@@ -57,9 +57,8 @@ class RiskField(models.Model):
 
     Includes constants, common model field, and a boilerplate
     get_data method that will be overridden by child classes.
-    Since each child class is responsible for a specific data type,
-    ForeignKey relationships to Risks are defined in the child
-    class, as are value fields, for holding data.
+    ForeignKey relationships to the Risk model are defined in the child
+    classes.
     """
 
     # Type constants
